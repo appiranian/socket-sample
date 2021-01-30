@@ -9,7 +9,7 @@ export class CoinsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     constructor() {
         setInterval( ()=>{
-            this.broadcast('chat',{
+            this.broadcast('response message',{
                 coins: [
                     {name: "Bitcoin",symbol: "BTC",value: "40000",unit: "$"},
                     {name: "Etherum",symbol: "ETH",value: "1200",unit: "$"},
@@ -21,7 +21,9 @@ export class CoinsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     handleConnection(client: any) {
+        console.log("a client connected...");
         this.wsClients.push(client);
+        //client.send("chat","ffff");
     }
 
     handleDisconnect(client) {
@@ -30,8 +32,8 @@ export class CoinsGateway implements OnGatewayConnection, OnGatewayDisconnect {
             this.wsClients.splice(i, 1);
             break;
           }
-        }
-        this.broadcast('disconnect',{});
+	}
+	this.broadcast('disconnect',{});
       }
 
       private broadcast(event, message: any) {
@@ -41,9 +43,12 @@ export class CoinsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
       }
 
-    //   @SubscribeMessage('chat')
-    //   onChgEvent(client: any, payload: any) {
-        
-    //   }
+       @SubscribeMessage('chat')
+       onChgEvent(client: any, payload: any) {
+        client.broadcast.emit('chat', "ffff from server");
+        client.send('fff',"fff from server");
+        console.log(payload);
+
+       }
 
 }
