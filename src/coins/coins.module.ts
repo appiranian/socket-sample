@@ -11,10 +11,10 @@ export class CoinsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         setInterval( ()=>{
             this.broadcast('response message',{
                 coins: [
-                    {name: "Bitcoin",symbol: "BTC",value: "40000",unit: "$"},
-                    {name: "Etherum",symbol: "ETH",value: "1200",unit: "$"},
-                    {name: "Bitcoin Satushi Vision",symbol: "BSV",value: "189",unit: "$"},
-                    {name: "Tron",symbol: "TRX",value: "0.03232",unit: "$"}
+                    {name: "Bitcoin",symbol: "BTC",value: `42${Math.floor(Math.random() * 999) + 100}`,unit: "$"},
+                    {name: "Etherum",symbol: "ETH",value: `1${Math.floor(Math.random() * 999) + 100}`,unit: "$"},
+                    {name: "Bitcoin Satushi Vision",symbol: "BSV",value: `${Math.floor(Math.random() * 999) + 100}`,unit: "$"},
+                    {name: "Tron",symbol: "TRX",value: `0.00${Math.floor(Math.random() * 999) + 100}`,unit: "$"}
                 ]
             });
         },1000);
